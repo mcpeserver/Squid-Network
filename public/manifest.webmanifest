@@ -1,0 +1,15 @@
+{
+  "short_name": "SQUID NETWORK",
+  "name": "SQUID NETWORK - Official Minecraft Server",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0d1527",
+  "theme_color": "#0ea5e9",
+  "display": "standalone"
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Squid Network",
+  "description": "Official Landing Page for Squid Network Minecraft Server (Bedrock & Java Edition)",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
