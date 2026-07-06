@@ -54,7 +54,9 @@ Berikut adalah struktur direktori proyek ini:
 ├── index.html                 # Struktur utama HTML
 ├── package.json               # Daftar dependensi & script proyek
 ├── tsconfig.json              # Konfigurasi aturan TypeScript
-└── vite.config.ts             # Pengaturan bundler Vite
+├── vite.config.ts             # Pengaturan bundler Vite
+├── vercel.json                # Konfigurasi routing & SPA fallback untuk Vercel
+└── LICENSE                    # Lisensi resmi MIT untuk repositori GitHub
 ```
 
 ---
@@ -128,6 +130,8 @@ links: {
 
 ## ☁️ Cara Deploy ke Vercel
 
+Proyek ini telah dikonfigurasi dengan `vercel.json` untuk menjamin rute URL Single Page Application (SPA) berjalan mulus tanpa masalah halaman "404 Not Found" saat di-refresh.
+
 Sangat mudah untuk mempublikasikan website ini agar bisa diakses oleh semua orang melalui internet menggunakan **Vercel** (Gratis):
 
 1. Unggah kode proyek ini ke akun **GitHub** kamu.
@@ -139,7 +143,8 @@ Sangat mudah untuk mempublikasikan website ini agar bisa diakses oleh semua oran
 ---
 
 ## 🛡️ Lisensi
-Proyek ini dilisensikan di bawah **Lisensi MIT**. Kamu bebas menggunakan, memodifikasi, dan membagikan website ini untuk server komunitasmu.
+
+Proyek ini dilisensikan secara resmi di bawah **Lisensi MIT** (tercantum dalam file `LICENSE` pada direktori utama). Kamu bebas menggunakan, memodifikasi, mendistribusikan, dan membagikan website ini untuk server komunitasmu secara gratis dan komersial dengan tetap menyertakan hak cipta asli.
 
 ---
 

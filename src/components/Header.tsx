@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ExternalLink, Shield } from 'lucide-react';
 import { siteConfig } from '../config/site';
+import logoImg from '../assets/images/logo.png';
 
 interface HeaderProps {
   activeSection: string;
@@ -69,7 +70,7 @@ export default function Header({ activeSection }: HeaderProps) {
           {/* Logo & Server Name */}
           <a href="#beranda" onClick={(e) => handleNavClick(e, "#beranda")} className="flex items-center gap-2.5 group">
             <img 
-              src="/logo.png" 
+              src={logoImg} 
               alt="Logo SQUID NETWORK" 
               className="w-8 h-8 sm:w-10 h-10 object-contain rounded-lg transition-transform duration-300 group-hover:scale-110"
               referrerPolicy="no-referrer"

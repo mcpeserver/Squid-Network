@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { Copy, Check, BookOpen, Download, HelpCircle, Activity } from 'lucide-react';
 import { siteConfig } from '../config/site';
+import logoImg from '../assets/images/logo.png';
+import heroBgImg from '../assets/images/hero-bg.webp';
 
 export default function Hero() {
   const [copied, setCopied] = useState(false);
@@ -28,7 +30,7 @@ export default function Hero() {
       {/* Background Image with Dark Gradient Overlays */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 scale-105"
-        style={{ backgroundImage: "url('/hero-bg.webp')" }}
+        style={{ backgroundImage: `url(${heroBgImg})` }}
       />
       <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-900/60 to-slate-950" />
       <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-transparent to-slate-950/90" />
@@ -48,7 +50,7 @@ export default function Hero() {
           className="relative w-36 h-36 sm:w-44 sm:h-44 md:w-48 md:h-48 mb-6 drop-shadow-[0_15px_30px_rgba(14,165,233,0.3)] select-none"
         >
           <img 
-            src="/logo.png" 
+            src={logoImg} 
             alt="Logo SQUID NETWORK" 
             className="w-full h-full object-contain rounded-2xl border-4 border-yellow-400/20 bg-yellow-400/5 backdrop-blur-[2px] p-2"
             referrerPolicy="no-referrer"

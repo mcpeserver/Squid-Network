@@ -1,6 +1,7 @@
 import React from 'react';
 import { ShieldCheck, MessageSquare, ExternalLink } from 'lucide-react';
 import { siteConfig } from '../config/site';
+import logoImg from '../assets/images/logo.png';
 
 export default function Footer() {
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
@@ -24,7 +25,7 @@ export default function Footer() {
           {/* Logo and Server Info */}
           <a href="#beranda" onClick={(e) => handleNavClick(e, "#beranda")} className="flex items-center gap-3 group">
             <img 
-              src="/logo.png" 
+              src={logoImg} 
               alt="Logo SQUID NETWORK" 
               className="w-10 h-10 object-contain rounded-xl transition-transform group-hover:scale-105"
               referrerPolicy="no-referrer"
