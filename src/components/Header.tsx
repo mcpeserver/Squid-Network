@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ExternalLink, Shield } from 'lucide-react';
+import { Menu, X, ExternalLink, Shield, Users, MessageSquare } from 'lucide-react';
 import { siteConfig } from '../config/site';
 import logoImg from '../assets/images/logo.png';
+import { useDeveloperConfig } from '../lib/developerApi';
 
 interface HeaderProps {
   activeSection: string;
@@ -10,6 +11,17 @@ interface HeaderProps {
 export default function Header({ activeSection }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { config: devConfig } = useDeveloperConfig();
+
+  const getWaUrl = (phone: string) => {
+    const digits = phone.replace(/\D/g, '');
+    if (digits.startsWith('0')) {
+      return `https://wa.me/62${digits.substring(1)}`;
+    }
+    return `https://wa.me/${digits}`;
+  };
+
+  const waLink = getWaUrl(devConfig.contact.whatsapp);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,20 +56,60 @@ export default function Header({ activeSection }: HeaderProps) {
   return (
     <header className="fixed top-0 left-0 w-full z-50 flex flex-col transition-all duration-300">
       {/* Developer Banner */}
-      <div className="w-full bg-slate-950/90 text-slate-300 py-2 px-4 border-b border-slate-800/50 flex justify-between items-center text-xs sm:text-sm backdrop-blur-md">
-        <div className="flex items-center gap-2 font-mono truncate">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse inline-block shrink-0"></span>
-          <span>{siteConfig.developer.text}</span>
+      <div className="w-full bg-slate-950/95 text-slate-300 py-2 px-4 border-b border-slate-800/60 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs backdrop-blur-md">
+        <div className="flex items-center gap-2 font-mono truncate w-full sm:w-auto justify-center sm:justify-start">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse inline-block shrink-0"></span>
+          <span className="text-[11px] sm:text-xs">
+            Developed by <span className="font-semibold text-white">{devConfig.name}</span> • WA:{" "}
+            <a 
+              href={waLink} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-emerald-400 hover:underline hover:text-emerald-300 transition-colors font-semibold"
+            >
+              {devConfig.contact.whatsapp}
+            </a>
+          </span>
         </div>
-        <a 
-          href={siteConfig.developer.otherSitesUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-1.5 bg-sky-500/10 hover:bg-sky-500/20 text-sky-400 font-medium py-1 px-2.5 rounded-md border border-sky-500/20 hover:border-sky-500/40 transition-all duration-200 text-xs shrink-0 select-none ml-2"
-        >
-          <span>Website Lainnya</span>
-          <ExternalLink className="w-3.5 h-3.5" />
-        </a>
+        
+        {/* Dynamic Developer & Community Links */}
+        <div className="flex items-center gap-2 flex-wrap justify-center sm:justify-end shrink-0 select-none">
+          {/* Community Site */}
+          <a 
+            href={devConfig.community.website}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 bg-slate-900/60 hover:bg-slate-800 text-slate-300 hover:text-white py-1 px-2 rounded border border-slate-800 hover:border-slate-700 transition-all text-[10px] sm:text-xs"
+            title={`Kunjungi ${devConfig.community.name}`}
+          >
+            <Users className="w-3 h-3 text-sky-400" />
+            <span>{devConfig.community.name}</span>
+          </a>
+          
+          {/* Community Discord */}
+          <a 
+            href={devConfig.community.discord}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-400 py-1 px-2 rounded border border-indigo-500/20 hover:border-indigo-500/40 transition-all text-[10px] sm:text-xs"
+            title="Gabung Discord Developer"
+          >
+            <MessageSquare className="w-3 h-3 text-indigo-400" />
+            <span>Discord Dev</span>
+          </a>
+
+          {/* Portfolio (Website Lainnya) */}
+          <a 
+            href={devConfig.website.portfolio}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 bg-sky-500/10 hover:bg-sky-500/20 text-sky-400 font-medium py-1 px-2.5 rounded border border-sky-500/20 hover:border-sky-500/40 transition-all text-[10px] sm:text-xs"
+            title="Lihat Website / Jasa Lainnya"
+          >
+            <span>Website Lainnya</span>
+            <ExternalLink className="w-3 h-3" />
+          </a>
+        </div>
       </div>
 
       {/* Main Navigation */}

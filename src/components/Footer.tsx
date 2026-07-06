@@ -1,9 +1,22 @@
 import React from 'react';
-import { ShieldCheck, MessageSquare, ExternalLink } from 'lucide-react';
+import { ShieldCheck, MessageSquare, ExternalLink, Users } from 'lucide-react';
 import { siteConfig } from '../config/site';
 import logoImg from '../assets/images/logo.png';
+import { useDeveloperConfig } from '../lib/developerApi';
 
 export default function Footer() {
+  const { config: devConfig } = useDeveloperConfig();
+
+  const getWaUrl = (phone: string) => {
+    const digits = phone.replace(/\D/g, '');
+    if (digits.startsWith('0')) {
+      return `https://wa.me/62${digits.substring(1)}`;
+    }
+    return `https://wa.me/${digits}`;
+  };
+
+  const waLink = getWaUrl(devConfig.contact.whatsapp);
+
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     const element = document.querySelector(id);
@@ -59,28 +72,51 @@ export default function Footer() {
           </div>
 
           {/* Developer Credits Info */}
-          <div className="flex flex-col items-center md:items-end gap-1.5 text-center md:text-right">
+          <div className="flex flex-col items-center md:items-end gap-2 text-center md:text-right">
             <div className="flex items-center gap-2 text-slate-400 font-mono text-[11px]">
-              <span>Website dikembangkan oleh <span className="font-bold text-sky-400">RAN DEV</span></span>
+              <span>Website dikembangkan oleh <span className="font-bold text-sky-400">{devConfig.name}</span></span>
             </div>
             
-            <div className="flex items-center gap-2.5">
+            <div className="flex flex-wrap items-center justify-center md:justify-end gap-x-3 gap-y-1.5 text-slate-400">
               <a 
-                href={siteConfig.developer.waUrl}
+                href={waLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-1 hover:text-emerald-400 transition-colors"
                 title="Hubungi WhatsApp Developer"
               >
-                <MessageSquare className="w-3.5 h-3.5" />
-                <span>WhatsApp RAN DEV</span>
+                <MessageSquare className="w-3.5 h-3.5 text-emerald-400" />
+                <span>WA {devConfig.name}</span>
               </a>
               <span className="text-slate-700">•</span>
               <a 
-                href={siteConfig.developer.otherSitesUrl}
+                href={devConfig.community.website}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-1 hover:text-sky-400 transition-colors"
+                title={`Kunjungi Website ${devConfig.community.name}`}
+              >
+                <Users className="w-3.5 h-3.5 text-sky-400" />
+                <span>{devConfig.community.name}</span>
+              </a>
+              <span className="text-slate-700">•</span>
+              <a 
+                href={devConfig.community.discord}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 hover:text-indigo-400 transition-colors"
+                title="Gabung Discord Developer"
+              >
+                <MessageSquare className="w-3.5 h-3.5 text-indigo-400" />
+                <span>Discord Dev</span>
+              </a>
+              <span className="text-slate-700">•</span>
+              <a 
+                href={devConfig.website.portfolio}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 hover:text-sky-400 transition-colors"
+                title="Website / Jasa Developer Lainnya"
               >
                 <span>Website Lainnya</span>
                 <ExternalLink className="w-3.5 h-3.5" />
